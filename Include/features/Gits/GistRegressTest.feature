@@ -24,8 +24,8 @@ Feature: create a public gist.
   Scenario: OpenGitUrl
   Given user open git url
   When user click by href '/login'
-  And user input by name 'login' with value 'rizkyanindita@gmail.com'
-  And user input by name 'password' with value 'Ranindita011`'
+  And user input by name 'login' with value '{your cred}'
+  And user input by name 'password' with value '{your cred}`'
   Then user click button 'commit'
   
   
