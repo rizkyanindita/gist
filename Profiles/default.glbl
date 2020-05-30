@@ -9,4 +9,14 @@
       <initValue>'https://katalon-studio-samples.github.io/calculator'</initValue>
       <name>baseUrl</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'https://github.com'</initValue>
+      <name>giturl</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'https://gist.github.com/'</initValue>
+      <name>gisturl</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

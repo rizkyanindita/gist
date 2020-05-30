@@ -4,10 +4,12 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.checkpoint.CheckpointFactory
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testcase.TestCaseFactory
@@ -15,14 +17,10 @@ import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testdata.TestDataFactory
 import com.kms.katalon.core.testobject.ObjectRepository
 import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable
-
-import MobileBuiltInKeywords as Mobile
-import WSBuiltInKeywords as WS
-import WebUiBuiltInKeywords as WebUI
 
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.WebDriver
@@ -46,11 +44,36 @@ import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
 
+import com.kms.katalon.core.webui.common.WebUiCommonHelper
 
-class Plus {
 
-	@When("(\\d+) plus (\\d+)")
-	def multiply(long firstOperand, long secondOperand) {
-		WebUI.callTestCase(findTestCase("Test Cases/common/Plus number"), [ ('firstOperand') : firstOperand, ('secondOperand') : secondOperand ], FailureHandling.STOP_ON_FAILURE)
+
+class ControllerGeneral {
+
+	@Given("user open git url")
+	def openurl() {
+		WebUI.openBrowser('')
+		WebUI.navigateToUrl(GlobalVariable.giturl)
+		WebUI.maximizeWindow()
 	}
+	@Given("user open gist url")
+	def openurlgist() {
+		WebUI.navigateToUrl(GlobalVariable.gisturl)
+		WebUI.maximizeWindow()
+	}
+
+	@Given("clear text by name '(.*)'")
+	def clearwithoutrobot(value) {
+
+		WebElement element = WebUiCommonHelper.findWebElement(findTestObject('Object Repository/GIT/byname',['PARAM' : value]),120)
+		WebUI.executeJavaScript("arguments[0].value=''", Arrays.asList(element))
+	}
+
+	@Given("confirm alert")
+	def confirmalert() {
+		WebUI.waitForAlert(5)
+		WebUI.acceptAlert()
+	}
+	
+	
 }
